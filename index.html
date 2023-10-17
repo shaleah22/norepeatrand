@@ -1,20 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>QUESTIONS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Random Number Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #output {
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
-    <h1>WHAT DO YOU THINK</h1>
-    <div id="questionDisplay"></div>
-    <br>
-    <br>
-    <button onClick="newQuestion()">NEXT QUESTION</button>
-    <br> <br>
- 
-    <script src="javascript.js"></script>
+    <h1>Random Number Generator</h1>
+    <p>Click the button to generate a random number:</p>
+    <div id="output"></div>
+    <button onclick="generateRandomNumber()">Generate</button>
+
+    <script>
+        let usedNumbers = []; // To keep track of used numbers
+
+        function generateRandomNumber() {
+            const min = 1;
+            const max = 100;
+            if (usedNumbers.length === max - min + 1) {
+                // All numbers have been used, reset the array
+                usedNumbers = [];
+            }
+
+            let randomNumber;
+            do {
+                randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            } while (usedNumbers.includes(randomNumber));
+
+            usedNumbers.push(randomNumber);
+
+            document.getElementById('output').textContent = randomNumber;
+        }
+    </script>
 </body>
-
-
 </html>
